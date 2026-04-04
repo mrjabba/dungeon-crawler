@@ -1,32 +1,33 @@
 <div class="room background" *ngIf="currentRoom" role="main" aria-label="Dungeon room">
   <div class="room-contents">
-    <div class="location" aria-live="polite">Location (<span id="currentRoomId">{{ currentRoom.id }}</span>)</div>
-    <div class="room-description">{{currentRoom.desc}}</div>
+    <div class="location" aria-live="polite">Location <span class="room-id" id="currentRoomId">{{ currentRoom.id }}</span></div>
+    <p class="room-description">{{currentRoom.desc}}</p>
   </div>
-<div>
-    <div class="grid-row-outer">
-      <div>
-        <div class="grid-row">
-          <div class="grid-item-plain"></div>
-          <button class="grid-item" [ngClass]="{'exit-north exit': hasExit(direction.North) }" (click)="nav(direction.North)" [disabled]="!hasExit(direction.North)" [attr.aria-label]="hasExit(direction.North) ? 'Go north' : 'No exit north'" aria-describedby="currentRoomId">&#x2191;</button>
-          <div class="grid-item-plain"></div>
-        </div>
-        <div class="grid-row">
-          <button class="grid-item" [ngClass]="{'exit-west exit': hasExit(direction.West) }" (click)="nav(direction.West)" [disabled]="!hasExit(direction.West)" [attr.aria-label]="hasExit(direction.West) ? 'Go west' : 'No exit west'" aria-describedby="currentRoomId">&#x2190;</button>
-          <div class="grid-item exits" aria-hidden="true">&#x2295;</div>
-          <button class="grid-item" [ngClass]="{'exit-east exit': hasExit(direction.East) }" (click)="nav(direction.East)" [disabled]="!hasExit(direction.East)" [attr.aria-label]="hasExit(direction.East) ? 'Go east' : 'No exit east'" aria-describedby="currentRoomId">&#x2192;</button>        
-        </div>
-        <div class="grid-row">
-          <div class="grid-item-plain"></div>
-          <button class="grid-item" [ngClass]="{'exit-south exit': hasExit(direction.South) }" (click)="nav(direction.South)" [disabled]="!hasExit(direction.South)" [attr.aria-label]="hasExit(direction.South) ? 'Go south' : 'No exit south'" aria-describedby="currentRoomId">&#x2193;</button>
-          <div class="grid-item-plain"></div>
-        </div>
-      </div>    
-      <inventory [roomContents]="currentRoom.items"></inventory>
+  
+  <div class="navigation-area">
+    <div class="compass">
+      <div class="compass-row">
+        <div class="compass-spacer"></div>
+        <button class="compass-btn" [ngClass]="{'exit-north exit': hasExit(direction.North) }" (click)="nav(direction.North)" [disabled]="!hasExit(direction.North)" [attr.aria-label]="hasExit(direction.North) ? 'Go north' : 'No exit north'" aria-describedby="currentRoomId">&#x2191;</button>
+        <div class="compass-spacer"></div>
+      </div>
+      <div class="compass-row">
+        <button class="compass-btn" [ngClass]="{'exit-west exit': hasExit(direction.West) }" (click)="nav(direction.West)" [disabled]="!hasExit(direction.West)" [attr.aria-label]="hasExit(direction.West) ? 'Go west' : 'No exit west'" aria-describedby="currentRoomId">&#x2190;</button>
+        <div class="compass-center" aria-hidden="true">&#x2295;</div>
+        <button class="compass-btn" [ngClass]="{'exit-east exit': hasExit(direction.East) }" (click)="nav(direction.East)" [disabled]="!hasExit(direction.East)" [attr.aria-label]="hasExit(direction.East) ? 'Go east' : 'No exit east'" aria-describedby="currentRoomId">&#x2192;</button>        
+      </div>
+      <div class="compass-row">
+        <div class="compass-spacer"></div>
+        <button class="compass-btn" [ngClass]="{'exit-south exit': hasExit(direction.South) }" (click)="nav(direction.South)" [disabled]="!hasExit(direction.South)" [attr.aria-label]="hasExit(direction.South) ? 'Go south' : 'No exit south'" aria-describedby="currentRoomId">&#x2193;</button>
+        <div class="compass-spacer"></div>
+      </div>
     </div>
+    
+    <inventory [roomContents]="currentRoom.items"></inventory>
   </div>
-</div>
-<div>
-  <button class="startover-btn" (click)="startOver()" aria-label="Restart game from beginning">StartOver</button>
+  
+  <div class="action-area">
+    <button class="startover-btn" (click)="startOver()" aria-label="Restart game from beginning">↺ StartOver</button>
+  </div>
 </div>
 
