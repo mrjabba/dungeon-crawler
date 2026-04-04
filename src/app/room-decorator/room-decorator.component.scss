@@ -36,6 +36,29 @@
   line-height: 1.6;
 }
 
+.dungeon-message {
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 10px 15px;
+  color: #88ff88;
+  font-family: var(--font-terminal);
+  margin: 0;
+  font-style: italic;
+  border-top: 1px dashed var(--terminal-border);
+  animation: fadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .room-contents {
   background-color: var(--terminal-bg-overlay);
   color: var(--terminal-green);
@@ -45,6 +68,26 @@
   margin: 0 auto 20px;
   max-width: 100%;
   overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.room.transitioning .room-contents {
+  animation: roomTransition 0.4s ease-out;
+}
+
+@keyframes roomTransition {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .navigation-area {
@@ -142,10 +185,20 @@
   letter-spacing: 2px;
 }
 
-.startover-btn:hover {
+.startover-btn:hover:not(:disabled) {
   background: #330000;
   box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
   transform: translateY(-2px);
+}
+
+.startover-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+.startover-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .startover-btn:focus {

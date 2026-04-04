@@ -59,11 +59,13 @@ h2 {
   background-color: transparent;
   font-size: 14px;
   font-family: 'Courier New', Courier, monospace;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .inventory-box:hover {
   background-color: #001100;
+  transform: translateX(4px);
+  box-shadow: -2px 0 0 #00ff00;
 }
 
 .inventory-box:focus {
@@ -73,6 +75,10 @@ h2 {
 
 .inventory-box:last-child {
   border-bottom: none;
+}
+
+.inventory-box:active {
+  transform: scale(0.98);
 }
 
 .inventory-destination {
