@@ -2,7 +2,7 @@
 
 A small text-based adventure game built to practice Angular concepts.
 
-![Dungeon Hallway](/src/assets/dungeonhallway2.jpg)
+![Dungeon Hallway](/docs/example/example-screen.png)
 
 ## Game Features
 
