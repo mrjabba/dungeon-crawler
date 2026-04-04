@@ -4,13 +4,13 @@
     <div
       cdkDropList
       #roomContentsList="cdkDropList"
-      [cdkDropListData]="roomContents"
+      [cdkDropListData]="roomContents()"
       [cdkDropListConnectedTo]="[inventoryList]"
       class="inventory-list"
       role="list"
       aria-label="Items in current room"
       (cdkDropListDropped)="drop($event)">
-      @for (item of roomContents; track item; let i = $index) {
+      @for (item of roomContents(); track item; let i = $index) {
       <div class="inventory-box" cdkDrag role="listitem" [attr.aria-label]="'Item ' + (i + 1) + ': ' + item">{{item}}</div>
       }
       @if (!roomContents || roomContents.length === 0) {

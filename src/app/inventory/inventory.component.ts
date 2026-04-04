@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Inventory } from '../world';
 import { WorldService } from '../world.service';
 
@@ -16,16 +16,12 @@ import { WorldService } from '../world.service';
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss']
 })
-export class InventoryComponent implements OnInit {
-  @Input()
-  public roomContents!: string[];
+export class InventoryComponent {
+  public roomContents = input<string[]>([]);
   public inventory: Inventory;
 
   constructor(public worldService: WorldService) {
     this.inventory = this.worldService.getInventory();
-  }
-
-  ngOnInit(): void {
   }
 
   public drop(event: CdkDragDrop<string[]>) {
