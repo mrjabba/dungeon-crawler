@@ -1,46 +1,120 @@
+:host {
+  display: block;
+}
+
 h2 {
   text-align: center;
   padding: 10px;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.1rem;
+  margin: 10px 0;
+  border-bottom: 1px solid #004400;
 }
+
 .inventory-grid {
   display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
+
 .inventory {
-  border: 5px solid yellow;
+  border: 5px solid #00ff00;
   font-size: 1.5em;
   margin: 5px;
   padding: 20px;
 }
+
 .inventory-container {
   box-sizing: border-box;
-  border-radius: 15px;
-  background-color: black;
-  width: 225px;
-  margin: 0 25px 25px 0;
-  vertical-align: top;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 2px solid #004400;
+  min-width: 180px;
+  flex: 1;
+  max-width: 300px;
+  padding: 10px;
 }
+
 .inventory-list {
   box-sizing: border-box;
-  border: solid 1px #ccc;
+  border: 1px solid #004400;
   min-height: 60px;
-  background: white;
-  border-radius: 15px;
+  background: #0a0a0a;
+  border-radius: 8px;
   overflow: hidden;
-  background-color: black;
+  min-height: 150px;
 }
+
 .inventory-box {
-  padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
-  color: gray;
+  padding: 12px 10px;
+  border-bottom: 1px solid #002200;
+  color: #00cc00;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
   cursor: move;
-  background-color: black;
+  background-color: transparent;
   font-size: 14px;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background-color 0.2s ease;
 }
+
+.inventory-box:hover {
+  background-color: #001100;
+}
+
+.inventory-box:focus {
+  outline: 2px solid #00ff00;
+  outline-offset: -2px;
+}
+
+.inventory-box:last-child {
+  border-bottom: none;
+}
+
 .inventory-destination {
-  height: 200px;
+  min-height: 200px;
+}
+
+.empty-state {
+  padding: 20px;
+  text-align: center;
+  color: #006600;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .inventory-grid {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .inventory-container {
+    max-width: 100%;
+    min-width: 100%;
+  }
+  
+  .inventory-box {
+    padding: 15px 10px;
+    font-size: 16px;
+  }
+  
+  h2 {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .inventory-grid {
+    gap: 10px;
+  }
+  
+  .inventory-container {
+    min-width: 150px;
+  }
 }

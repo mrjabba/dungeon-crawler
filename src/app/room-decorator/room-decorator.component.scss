@@ -1,76 +1,157 @@
+:host {
+  display: block;
+}
+
 .background {
   background-image: url("../../assets/dungeonhallway2.jpg");
   background-repeat: no-repeat;
+  background-size: cover;
 }
+
 .location {
-  font-size: 0.5em;
+  font-size: 1.2rem;
   text-align: center;
   padding: 10px;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
 }
+
 .room-description {
-  font-size: 0.75em;
+  font-size: 1rem;
   text-align: center;
   padding: 10px;
+  color: #00cc00;
+  font-family: 'Courier New', Courier, monospace;
 }
+
 .grid-row-outer {
   margin: 10px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
+
 .grid-row {
   display: flex;
   padding: 10px;
   margin: 0;
   list-style: none;
+  gap: 5px;
 }
+
 .grid-item {
-  border-radius: 15px;
-  background: black;
+  border-radius: 8px;
+  background: #0a0a0a;
   padding: 5px;
-  width: 50px;
-  height: 50px;
-  color: white;
+  min-width: 50px;
+  min-height: 50px;
+  color: #00ff00;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.5rem;
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  border: 2px solid #004400;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
+
+.grid-item:focus {
+  outline: 3px solid #00ff00;
+  outline-offset: 2px;
+}
+
+.grid-item:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: #002200;
+}
+
 .grid-item-plain {
   padding: 5px;
-  width: 50px;
-  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
 }
+
 .room {
   font-size: 1.5em;
   margin: 5px;
   padding: 20px;
   flex-wrap: wrap;
 }
+
 .room-contents {
-  background-color: black;
-  color: gray;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #00ff00;
   border-radius: 15px;
   box-sizing: border-box;
-  border: 1px solid yellow;
+  border: 2px solid #00ff00;
   margin: 10px;
-  width:660px;
+  max-width: 660px;
+  width: 100%;
 }
+
 .exits {
   font-size: 1.4em;
+  color: #00ff00;
 }
-.roomtest {
-  border: 1px solid yellow;
-  border-radius: 15px;
-  box-sizing: border-box;
-  background-color: black;
-  width: 40%;
-  height: 40%;
-  margin: 10px
-}
+
 .exit {
-  border: 2px solid green;
+  border: 2px solid #00ff00;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
-.exit:hover {
-  color: red;
+
+.exit:hover:not(:disabled) {
+  background: #001100;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
 }
+
 .navigation button {
   margin: 1px 2px 1px 1px;
+}
+
+.startover-btn {
+  background: #330000;
+  color: #ff6666;
+  border: 2px solid #ff0000;
+  padding: 10px 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 10px;
+  transition: all 0.2s ease;
+}
+
+.startover-btn:hover {
+  background: #440000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+.startover-btn:focus {
+  outline: 3px solid #ff0000;
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .room-contents {
+    margin: 5px;
+    padding: 10px;
+  }
+  
+  .grid-item {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1.2rem;
+  }
+  
+  .location {
+    font-size: 1rem;
+  }
+  
+  .room-description {
+    font-size: 0.9rem;
+  }
 }

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, WritableSignal, computed, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit, WritableSignal, computed, input, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { Coordinate, Direction, Room } from '../world';
 import { WorldService } from '../world.service';
 import { InventoryComponent } from '../inventory/inventory.component';
@@ -10,6 +11,7 @@ import { InventoryComponent } from '../inventory/inventory.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
+    MatButtonModule,
     InventoryComponent
     ],
   templateUrl: './room-decorator.component.html',
@@ -24,8 +26,34 @@ export class RoomDecoratorComponent implements OnInit {
   public direction = Direction;
   public moveDirection!: string;
 
-  constructor(public worldService: WorldService) {
+  constructor(public worldService: WorldService, private cdr: ChangeDetectorRef) {
    }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    switch(event.key) {
+      case 'ArrowUp':
+      case 'w':
+      case 'W':
+        if (this.hasExit(Direction.North)) this.nav(Direction.North);
+        break;
+      case 'ArrowDown':
+      case 's':
+      case 'S':
+        if (this.hasExit(Direction.South)) this.nav(Direction.South);
+        break;
+      case 'ArrowLeft':
+      case 'a':
+      case 'A':
+        if (this.hasExit(Direction.West)) this.nav(Direction.West);
+        break;
+      case 'ArrowRight':
+      case 'd':
+      case 'D':
+        if (this.hasExit(Direction.East)) this.nav(Direction.East);
+        break;
+    }
+  }
 
   ngOnInit(): void {
     console.log(`startingRoomId=${JSON.stringify(this.startingRoomId())}`);
@@ -61,11 +89,13 @@ export class RoomDecoratorComponent implements OnInit {
 
   private navigate(coordinate: Coordinate): void {
     this.currentRoom = this.worldService.getRoom(coordinate.roomId);
+    this.cdr.markForCheck();
     console.log(`navigating to=${JSON.stringify(coordinate)}`);
   }
 
   public startOver(): void {
     this.currentRoom = this.worldService.goToStartingRoom();
+    this.cdr.markForCheck();
     console.log(`>>> startOver currentRoom=${JSON.stringify(this.currentRoom)}`);
   }
 }

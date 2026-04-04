@@ -1,4 +1,4 @@
-<div class="inventory-grid">
+<div class="inventory-grid" role="region" aria-label="Item management">
   <div class="inventory-container">
     <h2>Room Contents</h2>
     <div
@@ -7,20 +7,26 @@
       [cdkDropListData]="roomContents"
       [cdkDropListConnectedTo]="[inventoryList]"
       class="inventory-list"
+      role="list"
+      aria-label="Items in current room"
       (cdkDropListDropped)="drop($event)">
-      <div class="inventory-box" *ngFor="let item of roomContents" cdkDrag>{{item}}</div>
+      <div class="inventory-box" *ngFor="let item of roomContents; let i = index" cdkDrag role="listitem" [attr.aria-label]="'Item ' + (i + 1) + ': ' + item">{{item}}</div>
+      <div class="empty-state" *ngIf="!roomContents || roomContents.length === 0" role="status">No items in this room</div>
     </div>
   </div>
   <div class="inventory-container">
-    <h2>Inventory</h2>
+    <h2>Your Inventory</h2>
     <div
       cdkDropList
       #inventoryList="cdkDropList"
       [cdkDropListData]="inventory.items"
       [cdkDropListConnectedTo]="[roomContentsList]"
       class="inventory-list inventory-destination"
+      role="list"
+      aria-label="Your collected items"
       (cdkDropListDropped)="drop($event)">
-      <div class="inventory-box" *ngFor="let item of inventory.items" cdkDrag>{{item}}</div>
+      <div class="inventory-box" *ngFor="let item of inventory.items; let i = index" cdkDrag role="listitem" [attr.aria-label]="'Inventory item ' + (i + 1) + ': ' + item">{{item}}</div>
+      <div class="empty-state" *ngIf="!inventory.items || inventory.items.length === 0" role="status">Your inventory is empty</div>
     </div>
   </div>
 </div>
