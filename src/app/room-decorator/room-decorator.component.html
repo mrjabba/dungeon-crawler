@@ -1,8 +1,11 @@
-<div class="room background" *ngIf="currentRoom" role="main" aria-label="Dungeon room" [class.transitioning]="isTransitioning()" [style.background-image]="'url(' + currentBackground() + ')'">
+<div class="room background" role="main" aria-label="Dungeon room" [class.transitioning]="isTransitioning()" [style.background-image]="'url(' + currentBackground() + ')'">
+  @if (currentRoom) {
   <div class="room-contents">
     <div class="location" aria-live="polite">Location <span class="room-id" id="currentRoomId">{{ currentRoom.id }}</span></div>
     <p class="room-description">{{currentRoom.desc}}</p>
-    <p class="dungeon-message" *ngIf="currentMessage() as msg">{{msg.text}}</p>
+    @if (currentMessage(); as msg) {
+    <p class="dungeon-message">{{msg.text}}</p>
+    }
   </div>
   
   <div class="navigation-area">
@@ -30,5 +33,5 @@
   <div class="action-area">
     <button class="startover-btn" (click)="startOver()" [disabled]="isTransitioning()" aria-label="Restart game from beginning">↺ StartOver</button>
   </div>
-</div>
+  }
 

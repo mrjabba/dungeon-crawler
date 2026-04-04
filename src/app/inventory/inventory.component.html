@@ -10,8 +10,12 @@
       role="list"
       aria-label="Items in current room"
       (cdkDropListDropped)="drop($event)">
-      <div class="inventory-box" *ngFor="let item of roomContents; let i = index" cdkDrag role="listitem" [attr.aria-label]="'Item ' + (i + 1) + ': ' + item">{{item}}</div>
-      <div class="empty-state" *ngIf="!roomContents || roomContents.length === 0" role="status">No items in this room</div>
+      @for (item of roomContents; track item; let i = $index) {
+      <div class="inventory-box" cdkDrag role="listitem" [attr.aria-label]="'Item ' + (i + 1) + ': ' + item">{{item}}</div>
+      }
+      @if (!roomContents || roomContents.length === 0) {
+      <div class="empty-state" role="status">No items in this room</div>
+      }
     </div>
   </div>
   <div class="inventory-container">
@@ -25,8 +29,12 @@
       role="list"
       aria-label="Your collected items"
       (cdkDropListDropped)="drop($event)">
-      <div class="inventory-box" *ngFor="let item of inventory.items; let i = index" cdkDrag role="listitem" [attr.aria-label]="'Inventory item ' + (i + 1) + ': ' + item">{{item}}</div>
-      <div class="empty-state" *ngIf="!inventory.items || inventory.items.length === 0" role="status">Your inventory is empty</div>
+      @for (item of inventory.items; track item; let i = $index) {
+      <div class="inventory-box" cdkDrag role="listitem" [attr.aria-label]="'Inventory item ' + (i + 1) + ': ' + item">{{item}}</div>
+      }
+      @if (!inventory.items || inventory.items.length === 0) {
+      <div class="empty-state" role="status">Your inventory is empty</div>
+      }
     </div>
   </div>
 </div>
