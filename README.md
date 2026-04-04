@@ -1,27 +1,35 @@
-# Kevingame
+# Dungeon Crawler
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.11.
+A small text-based adventure game built to practice Angular concepts.
 
-## Development server
+![Dungeon Hallway](/src/assets/dungeonhallway2.jpg)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Game Features
 
-## Code scaffolding
+- Navigate through rooms using cardinal directions (North, South, East, West)
+- Explore an interconnected world with multiple locations:
+  - Starting house
+  - Large rooms, hallways, and hidden areas
+  - Dining room, study, library, kitchen, and more
+- Pick up and collect items as you explore
+- Compass-based navigation system
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This is a small hobby project for learning and practicing Angular fundamentals including:
+- Standalone components
+- Angular Material integration
+- Reactive forms
+- Services and dependency injection
+- TypeScript interfaces and enums
 
-## Build
+## Quick Start
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm install
+npm start
+```
 
-## Running unit tests
+Then open http://localhost:4200/ in your browser.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Documentation
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- [Angular Development Guide](docs/angular-dev.md) — Details on running, building, and testing the app
