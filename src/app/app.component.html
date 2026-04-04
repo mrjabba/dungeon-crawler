@@ -3,9 +3,11 @@
     <h1>⚔️ Dungeon Crawler ⚔️</h1>
     <p class="subtitle">Navigate the dungeon. Collect items. Survive.</p>
   </header>
-  <main class="game-area" *ngIf="startingRoomId">
+  @if (startingRoomId) {
+  <main class="game-area">
     <room-decorator id="currentRoomId" [startingRoomId]="startingRoomId"></room-decorator>
   </main>
+  }
   <footer class="controls-hint">
     <span>Use</span> <kbd>W A S D</kbd> <span>or</span> <kbd>↑ ← ↓ →</kbd> <span>to navigate</span>
   </footer>
