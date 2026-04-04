@@ -38,6 +38,39 @@ describe('RoomDecoratorComponent', () => {
     expect(await harness.getRoomIdText()).toEqual(firstPossibleCoodinate.roomId.toString());
   });
 
+  it('should change background image when player moves to a different room', async () => {
+    const { harness } = await setup();
+    const initialBackground = await harness.getBackgroundImage();
+    
+    await harness.navigate(Direction.North);
+    await harness.waitForTransition();
+    const afterFirstMove = await harness.getBackgroundImage();
+    expect(afterFirstMove).not.toBe(initialBackground);
+    
+    await harness.navigate(Direction.South);
+    await harness.waitForTransition();
+    const afterSecondMove = await harness.getBackgroundImage();
+    expect(afterSecondMove).not.toBe(afterFirstMove);
+  });
+
+  it('should cycle back to first background after all backgrounds are used', async () => {
+    const { harness } = await setup();
+    const firstBackground = await harness.getBackgroundImage();
+    
+    await harness.navigate(Direction.North);
+    await harness.waitForTransition();
+    const secondBackground = await harness.getBackgroundImage();
+    
+    await harness.navigate(Direction.East);
+    await harness.waitForTransition();
+    const thirdBackground = await harness.getBackgroundImage();
+    
+    await harness.navigate(Direction.West);
+    await harness.waitForTransition();
+    const backToFirst = await harness.getBackgroundImage();
+    expect(backToFirst).toBe(firstBackground);
+  });
+
   async function setup() {
     await TestBed.configureTestingModule({
       imports: [RoomDecoratorComponent],
