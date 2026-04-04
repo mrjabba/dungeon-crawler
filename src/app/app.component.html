@@ -1,7 +1,13 @@
 <div class="tile">
-  <div class="title title-background"><h1>Welcome to the world</h1></div>
-  <div class="location" *ngIf="startingRoomId">
+  <header class="title title-background">
+    <h1>⚔️ Dungeon Crawler ⚔️</h1>
+    <p class="subtitle">Navigate the dungeon. Collect items. Survive.</p>
+  </header>
+  <main class="game-area" *ngIf="startingRoomId">
     <room-decorator id="currentRoomId" [startingRoomId]="startingRoomId"></room-decorator>
-  </div>
+  </main>
+  <footer class="controls-hint">
+    <span>Use</span> <kbd>W A S D</kbd> <span>or</span> <kbd>↑ ← ↓ →</kbd> <span>to navigate</span>
+  </footer>
 </div>
 

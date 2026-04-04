@@ -1,32 +1,34 @@
-<div class="room background" *ngIf="currentRoom">
+<div class="room background" *ngIf="currentRoom" role="main" aria-label="Dungeon room" [class.transitioning]="isTransitioning()">
   <div class="room-contents">
-    <div class="location">Location (<span id="currentRoomId">{{ currentRoom.id }}</span>)</div>
-    <div class="room-description">{{currentRoom.desc}}</div>
+    <div class="location" aria-live="polite">Location <span class="room-id" id="currentRoomId">{{ currentRoom.id }}</span></div>
+    <p class="room-description">{{currentRoom.desc}}</p>
+    <p class="dungeon-message" *ngIf="currentMessage() as msg">{{msg.text}}</p>
   </div>
-<div>
-    <div class="grid-row-outer">
-      <div>
-        <div class="grid-row">
-          <div class="grid-item-plain"></div>
-          <div class="grid-item" [ngClass]="{'exit-north exit': hasExit(direction.North) }" (click)="nav(direction.North)">&#x2191;</div>
-          <div class="grid-item-plain"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-item" [ngClass]="{'exit-west exit': hasExit(direction.West) }" (click)="nav(direction.West)">&#x2190;</div>
-          <div class="grid-item exits">&#x2295;</div>
-          <div class="grid-item" [ngClass]="{'exit-east exit': hasExit(direction.East) }" (click)="nav(direction.East)">&#x2192;</div>        
-        </div>
-        <div class="grid-row">
-          <div class="grid-item-plain"></div>
-          <div class="grid-item" [ngClass]="{'exit-south exit': hasExit(direction.South) }" (click)="nav(direction.South)">&#x2193;</div>
-          <div class="grid-item-plain"></div>
-        </div>
-      </div>    
-      <inventory [roomContents]="currentRoom.items"></inventory>
+  
+  <div class="navigation-area">
+    <div class="compass">
+      <div class="compass-row">
+        <div class="compass-spacer"></div>
+        <button class="compass-btn" [ngClass]="{'exit-north exit': hasExit(direction.North) }" (click)="nav(direction.North)" [disabled]="!hasExit(direction.North) || isTransitioning()" [attr.aria-label]="hasExit(direction.North) ? 'Go north' : 'No exit north'" aria-describedby="currentRoomId">&#x2191;</button>
+        <div class="compass-spacer"></div>
+      </div>
+      <div class="compass-row">
+        <button class="compass-btn" [ngClass]="{'exit-west exit': hasExit(direction.West) }" (click)="nav(direction.West)" [disabled]="!hasExit(direction.West) || isTransitioning()" [attr.aria-label]="hasExit(direction.West) ? 'Go west' : 'No exit west'" aria-describedby="currentRoomId">&#x2190;</button>
+        <div class="compass-center" aria-hidden="true">&#x2295;</div>
+        <button class="compass-btn" [ngClass]="{'exit-east exit': hasExit(direction.East) }" (click)="nav(direction.East)" [disabled]="!hasExit(direction.East) || isTransitioning()" [attr.aria-label]="hasExit(direction.East) ? 'Go east' : 'No exit east'" aria-describedby="currentRoomId">&#x2192;</button>        
+      </div>
+      <div class="compass-row">
+        <div class="compass-spacer"></div>
+        <button class="compass-btn" [ngClass]="{'exit-south exit': hasExit(direction.South) }" (click)="nav(direction.South)" [disabled]="!hasExit(direction.South) || isTransitioning()" [attr.aria-label]="hasExit(direction.South) ? 'Go south' : 'No exit south'" aria-describedby="currentRoomId">&#x2193;</button>
+        <div class="compass-spacer"></div>
+      </div>
     </div>
+    
+    <inventory [roomContents]="currentRoom.items"></inventory>
   </div>
-</div>
-<div>
-  <button (click)="startOver()">StartOver</button>
+  
+  <div class="action-area">
+    <button class="startover-btn" (click)="startOver()" [disabled]="isTransitioning()" aria-label="Restart game from beginning">↺ StartOver</button>
+  </div>
 </div>
 

@@ -17,9 +17,11 @@ describe('RoomDecoratorComponent', () => {
     const { harness, worldService } = await setup();
     const roomIdText = await harness.getRoomIdText();
     await harness.navigate(Direction.North);
+    await harness.waitForTransition();
     expect(await harness.getRoomIdText()).not.toContain(WorldService.STARTING_LOCATION.toString());
 
     await harness.navigate(Direction.South);
+    await harness.waitForTransition();
     const currentRoomId = await harness.getRoomIdText();
     expect(currentRoomId).toContain(WorldService.STARTING_LOCATION.toString());
 
@@ -32,6 +34,7 @@ describe('RoomDecoratorComponent', () => {
     const firstPossibleCoodinate = currentRoom.exits[0];
     const firstPossibleExit = firstPossibleCoodinate.direction;
     await harness.navigate(firstPossibleExit);
+    await harness.waitForTransition();
     expect(await harness.getRoomIdText()).toEqual(firstPossibleCoodinate.roomId.toString());
   });
 

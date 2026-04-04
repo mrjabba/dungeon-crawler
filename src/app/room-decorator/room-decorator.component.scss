@@ -1,76 +1,257 @@
+:host {
+  display: block;
+}
+
 .background {
   background-image: url("../../assets/dungeonhallway2.jpg");
   background-repeat: no-repeat;
-}
-.location {
-  font-size: 0.5em;
-  text-align: center;
-  padding: 10px;
-}
-.room-description {
-  font-size: 0.75em;
-  text-align: center;
-  padding: 10px;
-}
-.grid-row-outer {
-  margin: 10px;
-  display: flex;
-}
-.grid-row {
-  display: flex;
-  padding: 10px;
-  margin: 0;
-  list-style: none;
-}
-.grid-item {
-  border-radius: 15px;
-  background: black;
-  padding: 5px;
-  width: 50px;
-  height: 50px;
-  color: white;
-  font-weight: bold;
-  font-size: 1em;
-  text-align: center;
-}
-.grid-item-plain {
-  padding: 5px;
-  width: 50px;
-  height: 50px;
-}
-.room {
-  font-size: 1.5em;
-  margin: 5px;
+  background-size: cover;
+  background-position: center;
   padding: 20px;
-  flex-wrap: wrap;
+  border-radius: 8px;
 }
+
+.location {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 15px;
+  color: var(--terminal-green);
+  font-family: var(--font-terminal);
+  border-bottom: 1px solid var(--terminal-border);
+  margin: 0 0 10px;
+}
+
+.room-id {
+  color: var(--terminal-green-dark);
+  font-weight: bold;
+}
+
+.room-description {
+  font-size: 1rem;
+  text-align: center;
+  padding: 10px 15px 20px;
+  color: var(--terminal-green-dim);
+  font-family: var(--font-terminal);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.dungeon-message {
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 10px 15px;
+  color: #88ff88;
+  font-family: var(--font-terminal);
+  margin: 0;
+  font-style: italic;
+  border-top: 1px dashed var(--terminal-border);
+  animation: fadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .room-contents {
-  background-color: black;
-  color: gray;
-  border-radius: 15px;
+  background-color: var(--terminal-bg-overlay);
+  color: var(--terminal-green);
+  border-radius: 8px;
   box-sizing: border-box;
-  border: 1px solid yellow;
-  margin: 10px;
-  width:660px;
+  border: 2px solid var(--terminal-green);
+  margin: 0 auto 20px;
+  max-width: 100%;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.exits {
-  font-size: 1.4em;
+
+.room.transitioning .room-contents {
+  animation: roomTransition 0.4s ease-out;
 }
-.roomtest {
-  border: 1px solid yellow;
-  border-radius: 15px;
-  box-sizing: border-box;
-  background-color: black;
-  width: 40%;
-  height: 40%;
-  margin: 10px
+
+@keyframes roomTransition {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
-.exit {
-  border: 2px solid green;
+
+.navigation-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 20px 0;
 }
-.exit:hover {
-  color: red;
+
+.compass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 }
-.navigation button {
-  margin: 1px 2px 1px 1px;
+
+.compass-row {
+  display: flex;
+  gap: 5px;
+}
+
+.compass-spacer {
+  width: 50px;
+  height: 50px;
+}
+
+.compass-center {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: var(--terminal-green);
+}
+
+.compass-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background: var(--terminal-bg);
+  color: var(--terminal-green);
+  font-weight: bold;
+  font-size: 1.5rem;
+  font-family: var(--font-terminal);
+  border: 2px solid var(--terminal-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.compass-btn:focus {
+  outline: 3px solid var(--terminal-green);
+  outline-offset: 2px;
+}
+
+.compass-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: var(--terminal-accent);
+}
+
+.compass-btn.exit {
+  border-color: var(--terminal-green);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.compass-btn.exit:hover:not(:disabled) {
+  background: var(--terminal-accent);
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+  transform: scale(1.05);
+}
+
+.action-area {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.startover-btn {
+  background: #1a0000;
+  color: #ff4444;
+  border: 2px solid #ff0000;
+  padding: 12px 24px;
+  font-family: var(--font-terminal);
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.startover-btn:hover:not(:disabled) {
+  background: #330000;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.startover-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+.startover-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.startover-btn:focus {
+  outline: 3px solid #ff0000;
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .background {
+    padding: 10px;
+  }
+  
+  .room-contents {
+    margin: 0 5px 15px;
+  }
+  
+  .location {
+    font-size: 1rem;
+    padding: 10px;
+  }
+  
+  .room-description {
+    font-size: 0.9rem;
+    padding: 8px 10px 15px;
+  }
+  
+  .navigation-area {
+    gap: 20px;
+  }
+  
+  .compass-spacer,
+  .compass-center,
+  .compass-btn {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .compass-btn {
+    font-size: 1.2rem;
+  }
+  
+  .compass-center {
+    font-size: 1.4rem;
+  }
+  
+  .startover-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .navigation-area {
+    gap: 20px;
+  }
 }

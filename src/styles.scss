@@ -1,9 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --terminal-green: #00ff00;
+  --terminal-green-dark: #00cc00;
+  --terminal-green-dim: #006600;
+  --terminal-bg: #0a0a0a;
+  --terminal-bg-overlay: rgba(0, 0, 0, 0.85);
+  --terminal-border: #004400;
+  --terminal-accent: #003300;
+  
+  --font-terminal: 'Courier New', Courier, monospace;
+}
 
-html, body { height: 100%; }
-body { 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body { 
+  height: 100%; 
   margin: 0;
-  background-color: black;
-  color: gray;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--terminal-bg);
+  color: var(--terminal-green);
+  font-family: var(--font-terminal);
+  line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
