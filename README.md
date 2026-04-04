@@ -1,6 +1,6 @@
 # Dungeon Crawler
 
-[![Tests](https://github.com/kevinhutson/dungeon-crawler/actions/workflows/tests.yml/badge.svg)](https://github.com/kevinhutson/dungeon-crawler/actions/workflows/tests.yml)
+[![Tests](https://github.com/mrjabba/dungeon-crawler/actions/workflows/tests.yml/badge.svg)](https://github.com/mrjabba/dungeon-crawler/actions/workflows/tests.yml)
 
 A small text-based adventure game built to practice Angular concepts.
 
