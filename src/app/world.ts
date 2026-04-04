@@ -33,7 +33,6 @@ export class ItemManifest {
   private items: string[];
 
   constructor() {
-    console.log('initializing item manifest');
     this.items = [
       'apple',
       'turkey leg',
