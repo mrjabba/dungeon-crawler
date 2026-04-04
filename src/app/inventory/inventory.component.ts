@@ -9,7 +9,6 @@ import { WorldService } from '../world.service';
   selector: 'inventory',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [WorldService],
   imports: [
     CommonModule,
     DragDropModule

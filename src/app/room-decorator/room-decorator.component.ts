@@ -8,7 +8,6 @@ import { InventoryComponent } from '../inventory/inventory.component';
   selector: 'room-decorator',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [WorldService],
   imports: [
     CommonModule,
     InventoryComponent
