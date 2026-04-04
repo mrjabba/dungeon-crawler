@@ -10,6 +10,12 @@ interface RoomMessage {
   type: 'exploration' | 'discovery' | 'atmosphere';
 }
 
+const BACKGROUND_IMAGES = [
+  '../../assets/dungeonhallway1.png',
+  '../../assets/dungeonhallway2.png',
+  '../../assets/dungeonhallway3.png',
+];
+
 @Component({
   selector: 'room-decorator',
   standalone: true,
@@ -31,6 +37,8 @@ export class RoomDecoratorComponent implements OnInit {
   
   public isTransitioning = signal(false);
   public currentMessage = signal<RoomMessage | null>(null);
+  public currentBackgroundIndex = signal(0);
+  public currentBackground = computed(() => BACKGROUND_IMAGES[this.currentBackgroundIndex()]);
   
   private roomMessages: RoomMessage[] = [
     { text: 'You push forward into the unknown...', type: 'exploration' },
@@ -115,6 +123,7 @@ export class RoomDecoratorComponent implements OnInit {
     
     setTimeout(() => {
       this.currentRoom = this.worldService.getRoom(coordinate.roomId);
+      this.currentBackgroundIndex.set((this.currentBackgroundIndex() + 1) % BACKGROUND_IMAGES.length);
       this.cdr.markForCheck();
       this.showRandomMessage();
       
@@ -131,6 +140,7 @@ export class RoomDecoratorComponent implements OnInit {
     this.isTransitioning.set(true);
     setTimeout(() => {
       this.currentRoom = this.worldService.goToStartingRoom();
+      this.currentBackgroundIndex.set(0);
       this.cdr.markForCheck();
       this.showRandomMessage();
       

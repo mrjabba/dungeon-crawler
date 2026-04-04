@@ -8,6 +8,12 @@ export class RoomDecoratorComponentHarness extends ComponentHarness {
     return (await this.locatorFor('#currentRoomId')()).text();
   }
 
+  async getBackgroundImage(): Promise<string> {
+    const background = await this.locatorFor('.background')();
+    const style = await background.getAttribute('style');
+    return style || '';
+  }
+
   async navigate(direction: Direction): Promise<void> {
     const button = await this.locatorFor(`.exit-${direction.toLowerCase()}`)();
     return button.click();

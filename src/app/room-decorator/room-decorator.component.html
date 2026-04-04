@@ -1,4 +1,4 @@
-<div class="room background" *ngIf="currentRoom" role="main" aria-label="Dungeon room" [class.transitioning]="isTransitioning()">
+<div class="room background" *ngIf="currentRoom" role="main" aria-label="Dungeon room" [class.transitioning]="isTransitioning()" [style.background-image]="'url(' + currentBackground() + ')'">
   <div class="room-contents">
     <div class="location" aria-live="polite">Location <span class="room-id" id="currentRoomId">{{ currentRoom.id }}</span></div>
     <p class="room-description">{{currentRoom.desc}}</p>
