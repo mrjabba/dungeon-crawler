@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Room } from './world';
 import { WorldService } from './world.service';
 
@@ -14,7 +14,6 @@ import { InventoryComponent } from './inventory/inventory.component';
 
 @Component({
   selector: 'app-root',
-  changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
       FormsModule,
       ReactiveFormsModule,

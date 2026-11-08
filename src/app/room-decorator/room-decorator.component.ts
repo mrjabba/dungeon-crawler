@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, WritableSignal, computed, input, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, WritableSignal, computed, input, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Coordinate, Direction, Room } from '../world';
 import { WorldService } from '../world.service';
@@ -17,7 +17,6 @@ const BACKGROUND_IMAGES = [
 
 @Component({
   selector: 'room-decorator',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatButtonModule,
     InventoryComponent

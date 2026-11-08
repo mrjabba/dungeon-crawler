@@ -1,12 +1,11 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Inventory } from '../world';
 import { WorldService } from '../world.service';
 
 @Component({
   selector: 'inventory',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     DragDropModule
     ],
