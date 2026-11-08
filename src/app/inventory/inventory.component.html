@@ -1,4 +1,5 @@
 <div class="inventory-grid" role="region" aria-label="Item management">
+  <div class="announcement" aria-live="polite">{{announcement()}}</div>
   <div class="inventory-container">
     <h2>Room Contents</h2>
     <div
@@ -7,11 +8,12 @@
       [cdkDropListData]="roomContents()"
       [cdkDropListConnectedTo]="[inventoryList]"
       class="inventory-list"
-      role="list"
-      aria-label="Items in current room"
+      [attr.role]="roomContents().length ? 'listbox' : 'group'"
+      aria-label="Items in current room. Press Enter to take an item."
+      (keydown)="onItemKeydown($event)"
       (cdkDropListDropped)="drop($event)">
-      @for (item of roomContents(); track item; let i = $index) {
-      <div class="inventory-box" cdkDrag role="listitem" [attr.aria-label]="'Item ' + (i + 1) + ': ' + item">{{item}}</div>
+      @for (item of roomContents(); track $index; let i = $index) {
+      <div class="inventory-box" cdkDrag role="option" aria-selected="false" [attr.tabindex]="i === 0 ? 0 : -1" (mousedown)="$event.preventDefault()">{{item}}</div>
       }
       @if (roomContents().length === 0) {
       <div class="empty-state" role="status">No items in this room</div>
@@ -26,11 +28,12 @@
       [cdkDropListData]="inventory.items"
       [cdkDropListConnectedTo]="[roomContentsList]"
       class="inventory-list inventory-destination"
-      role="list"
-      aria-label="Your collected items"
+      [attr.role]="inventory.items.length ? 'listbox' : 'group'"
+      aria-label="Your collected items. Press Enter to drop an item."
+      (keydown)="onItemKeydown($event)"
       (cdkDropListDropped)="drop($event)">
-      @for (item of inventory.items; track item; let i = $index) {
-      <div class="inventory-box" cdkDrag role="listitem" [attr.aria-label]="'Inventory item ' + (i + 1) + ': ' + item">{{item}}</div>
+      @for (item of inventory.items; track $index; let i = $index) {
+      <div class="inventory-box" cdkDrag role="option" aria-selected="false" [attr.tabindex]="i === 0 ? 0 : -1" (mousedown)="$event.preventDefault()">{{item}}</div>
       }
       @if (!inventory.items || inventory.items.length === 0) {
       <div class="empty-state" role="status">Your inventory is empty</div>

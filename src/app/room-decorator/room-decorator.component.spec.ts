@@ -125,6 +125,22 @@ describe('RoomDecoratorComponent', () => {
     expect(await startOver.getAttribute('aria-disabled')).toBe('false');
   });
 
+  it('should not walk while focus is on an item, and walk again after Escape', async () => {
+    const { harness } = await setup();
+    const press = (key: string) => (document.activeElement ?? document.body)
+      .dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+
+    press('i');
+    press('w');
+    await harness.waitForTransition();
+    expect(await harness.getRoomIdText()).toEqual('100');
+
+    press('Escape');
+    press('w');
+    await harness.waitForTransition();
+    expect(await harness.getRoomIdText()).toEqual('101');
+  });
+
   it('should change background image when player moves to a different room', async () => {
     const { harness } = await setup();
     const initialBackground = await harness.getBackgroundImage();

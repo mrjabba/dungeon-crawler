@@ -69,8 +69,18 @@ h2 {
 }
 
 .inventory-box:focus {
+  background-color: #003300;
   outline: 2px solid #00ff00;
   outline-offset: -2px;
+}
+
+.announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .inventory-box:last-child {
