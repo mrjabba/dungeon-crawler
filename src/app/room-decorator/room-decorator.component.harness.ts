@@ -1,4 +1,4 @@
-import { ComponentHarness, HarnessPredicate, TestElement } from '@angular/cdk/testing';
+import { ComponentHarness, TestElement } from '@angular/cdk/testing';
 import { Direction } from '../world';
 
 export class RoomDecoratorComponentHarness extends ComponentHarness {

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "kevingame": {
+    "dungeon-crawler": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -15,9 +15,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/kevingame",
+            "outputPath": "dist/dungeon-crawler",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [],
@@ -57,22 +57,16 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "kevingame:build:production"
+              "buildTarget": "dungeon-crawler:build:production"
             },
             "development": {
-              "buildTarget": "kevingame:build:development"
+              "buildTarget": "dungeon-crawler:build:development"
             }
           },
           "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "kevingame:build"
-          }
         },
         "test": {
           "builder": "@angular/build:unit-test",

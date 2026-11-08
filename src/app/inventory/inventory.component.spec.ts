@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { vi } from 'vitest';
 import { WorldService } from '../world.service';
 import { InventoryComponent } from './inventory.component';
@@ -281,5 +282,31 @@ describe('InventoryComponent keyboard', () => {
     expect(roomItems()).toEqual(['orange', 'hammer']);
     expect(warn).not.toHaveBeenCalled();
     warn.mockRestore();
+  });
+});
+
+
+describe('InventoryComponent drop', () => {
+  const dropEvent = (from: string[], to: string[], previousIndex: number, currentIndex: number) => ({
+    previousContainer: { data: from },
+    container: { data: to },
+    previousIndex,
+    currentIndex,
+  }) as unknown as CdkDragDrop<string[]>;
+
+  const component = () => TestBed.createComponent(InventoryComponent).componentInstance;
+
+  it('should reorder an item dropped in its own list', () => {
+    const list = ['apple', 'hammer', 'sword'];
+    component().drop(dropEvent(list, list, 0, 2));
+    expect(list).toEqual(['hammer', 'sword', 'apple']);
+  });
+
+  it('should move an item dropped in the other list to where it was dropped', () => {
+    const room = ['apple', 'hammer'];
+    const carried = ['book', 'sandwich'];
+    component().drop(dropEvent(room, carried, 1, 1));
+    expect(room).toEqual(['apple']);
+    expect(carried).toEqual(['book', 'hammer', 'sandwich']);
   });
 });

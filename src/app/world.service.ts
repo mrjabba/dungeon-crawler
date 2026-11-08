@@ -25,19 +25,16 @@ export class WorldService {
     return this.inventory;
   }
 
-  public getRooms(): Room[] {
-    return this.rooms;
-  }
-
   public goToStartingRoom(): Room {
     return this.getRoom(WorldService.STARTING_LOCATION);
   }
 
   public getRoom(id: number): Room {
-    return this.rooms.filter((room: Room) => {
-      // FIXME write a test here
-      return room.id === id;
-    })[0];
+    const room = this.rooms.find((room: Room) => room.id === id);
+    if (!room) {
+      throw new Error(`Unknown room ${id}`);
+    }
+    return room;
   }
 
   private loadRooms(): void {
@@ -45,7 +42,6 @@ export class WorldService {
         [
           { id: 100,
             desc: "You have materialized into a house. This is the beginning.",
-            style: 'room', // FIXME use an enum? style could be a UI descriptor?
             exits: [ { direction: Direction.North, roomId: 101} ],
             items: [
               'apple',
@@ -57,7 +53,6 @@ export class WorldService {
           },
           { id: 101,
             desc: "a large room",
-            style: 'room',
             exits: [
                { direction: Direction.North, roomId: 102},
                { direction: Direction.South, roomId: 100},
@@ -71,7 +66,6 @@ export class WorldService {
           },
           { id: 102,
             desc: "You are in a long hallway",
-            style: 'hallway',
             exits: [
                { direction: Direction.North, roomId: 106},
                { direction: Direction.South, roomId: 101},
