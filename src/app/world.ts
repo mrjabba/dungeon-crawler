@@ -18,5 +18,4 @@ export interface Room {
   desc: string;
   exits: Coordinate[];
   items: string[];
-  style?: string;
 }
