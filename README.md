@@ -18,8 +18,6 @@ A small text-based adventure game built to practice Angular concepts.
 
 This is a small hobby project for learning and practicing Angular fundamentals including:
 - Standalone components
-- Angular Material integration
-- Reactive forms
 - Services and dependency injection
 - TypeScript interfaces and enums
 
@@ -29,6 +27,8 @@ This is a small hobby project for learning and practicing Angular fundamentals i
 npm install
 npm start
 ```
+
+Needs Node 24, pinned in `.nvmrc`. Node 25 is not supported.
 
 Then open http://localhost:4200/ in your browser.
 

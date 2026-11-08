@@ -1,5 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, WritableSignal, computed, input, signal } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { ChangeDetectorRef, Component, OnInit, computed, input, signal } from '@angular/core';
 import { Coordinate, Direction, Room } from '../world';
 import { WorldService } from '../world.service';
 import { InventoryComponent } from '../inventory/inventory.component';
@@ -18,7 +17,6 @@ const BACKGROUND_IMAGES = [
 @Component({
   selector: 'room-decorator',
   imports: [
-    MatButtonModule,
     InventoryComponent
     ],
   templateUrl: './room-decorator.component.html',
@@ -32,7 +30,6 @@ export class RoomDecoratorComponent implements OnInit {
   public startingRoomId = input.required<number>();
   public currentRoom!: Room;
   public direction = Direction;
-  public moveDirection!: string;
   
   public isTransitioning = signal(false);
   public currentMessage = signal<RoomMessage | null>(null);
@@ -94,10 +91,6 @@ export class RoomDecoratorComponent implements OnInit {
     this.currentMessage.set(this.roomMessages[randomIndex]);
   }
 
-  public moveToExit(direction: Direction) {
-    this.moveDirection = direction;
-  }
-
   public hasExit(direction: Direction): boolean {
     let exit: Coordinate[] = this.currentRoom.exits.filter((exit: Coordinate) => {
       return exit.direction === direction;
@@ -112,7 +105,6 @@ export class RoomDecoratorComponent implements OnInit {
       return exit.direction === direction;
     });
     if (exit.length > 0) {
-      this.moveToExit(direction);
       this.transitionToRoom(exit[0]);
     }
   }

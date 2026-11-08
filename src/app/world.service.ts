@@ -25,10 +25,6 @@ export class WorldService {
     return this.inventory;
   }
 
-  public getRooms(): Room[] {
-    return this.rooms;
-  }
-
   public goToStartingRoom(): Room {
     return this.getRoom(WorldService.STARTING_LOCATION);
   }
