@@ -9,9 +9,9 @@ interface RoomMessage {
 }
 
 const BACKGROUND_IMAGES = [
-  '../../assets/dungeonhallway1.png',
-  '../../assets/dungeonhallway2.png',
-  '../../assets/dungeonhallway3.png',
+  '../../assets/dungeonhallway1.webp',
+  '../../assets/dungeonhallway2.webp',
+  '../../assets/dungeonhallway3.webp',
 ];
 
 @Component({
