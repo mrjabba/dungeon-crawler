@@ -19,6 +19,14 @@ export class RoomDecoratorComponentHarness extends ComponentHarness {
     return button.click();
   }
 
+  async getCompassButton(direction: Direction): Promise<TestElement> {
+    return this.locatorFor(`.compass-btn[aria-label$="${direction.toLowerCase()}"]`)();
+  }
+
+  async getStartOverButton(): Promise<TestElement> {
+    return this.locatorFor('.startover-btn')();
+  }
+
   async startOver(): Promise<void> {
     return (await this.locatorFor('.startover-btn')()).click();
   }

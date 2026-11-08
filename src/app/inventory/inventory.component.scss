@@ -88,7 +88,7 @@ h2 {
 .empty-state {
   padding: 20px;
   text-align: center;
-  color: #006600;
+  color: var(--terminal-green-dim);
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.9rem;
   font-style: italic;

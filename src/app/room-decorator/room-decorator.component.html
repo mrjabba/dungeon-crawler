@@ -1,4 +1,4 @@
-<div class="room background" role="main" aria-label="Dungeon room" [class.transitioning]="isTransitioning()" [style.background-image]="'url(' + currentBackground() + ')'">
+<div class="room background" [class.transitioning]="isTransitioning()" [style.background-image]="'url(' + currentBackground() + ')'">
   @if (currentRoom) {
   <div class="room-contents">
     <div class="location" aria-live="polite">Location <span class="room-id" id="currentRoomId">{{ currentRoom.id }}</span></div>
@@ -12,17 +12,17 @@
     <div class="compass">
       <div class="compass-row">
         <div class="compass-spacer"></div>
-        <button class="compass-btn" [class.exit]="hasExit(direction.North)" [class.exit-north]="hasExit(direction.North)" (click)="nav(direction.North)" [disabled]="!hasExit(direction.North) || isTransitioning()" [attr.aria-label]="hasExit(direction.North) ? 'Go north' : 'No exit north'" aria-describedby="currentRoomId">&#x2191;</button>
+        <button class="compass-btn" [class.exit]="hasExit(direction.North)" [class.exit-north]="hasExit(direction.North)" (click)="nav(direction.North)" [attr.aria-disabled]="!hasExit(direction.North) || isTransitioning()" [attr.aria-label]="hasExit(direction.North) ? 'Go north' : 'No exit north'" aria-describedby="currentRoomId">&#x2191;</button>
         <div class="compass-spacer"></div>
       </div>
       <div class="compass-row">
-        <button class="compass-btn" [class.exit]="hasExit(direction.West)" [class.exit-west]="hasExit(direction.West)" (click)="nav(direction.West)" [disabled]="!hasExit(direction.West) || isTransitioning()" [attr.aria-label]="hasExit(direction.West) ? 'Go west' : 'No exit west'" aria-describedby="currentRoomId">&#x2190;</button>
+        <button class="compass-btn" [class.exit]="hasExit(direction.West)" [class.exit-west]="hasExit(direction.West)" (click)="nav(direction.West)" [attr.aria-disabled]="!hasExit(direction.West) || isTransitioning()" [attr.aria-label]="hasExit(direction.West) ? 'Go west' : 'No exit west'" aria-describedby="currentRoomId">&#x2190;</button>
         <div class="compass-center" aria-hidden="true">&#x2295;</div>
-        <button class="compass-btn" [class.exit]="hasExit(direction.East)" [class.exit-east]="hasExit(direction.East)" (click)="nav(direction.East)" [disabled]="!hasExit(direction.East) || isTransitioning()" [attr.aria-label]="hasExit(direction.East) ? 'Go east' : 'No exit east'" aria-describedby="currentRoomId">&#x2192;</button>        
+        <button class="compass-btn" [class.exit]="hasExit(direction.East)" [class.exit-east]="hasExit(direction.East)" (click)="nav(direction.East)" [attr.aria-disabled]="!hasExit(direction.East) || isTransitioning()" [attr.aria-label]="hasExit(direction.East) ? 'Go east' : 'No exit east'" aria-describedby="currentRoomId">&#x2192;</button>        
       </div>
       <div class="compass-row">
         <div class="compass-spacer"></div>
-        <button class="compass-btn" [class.exit]="hasExit(direction.South)" [class.exit-south]="hasExit(direction.South)" (click)="nav(direction.South)" [disabled]="!hasExit(direction.South) || isTransitioning()" [attr.aria-label]="hasExit(direction.South) ? 'Go south' : 'No exit south'" aria-describedby="currentRoomId">&#x2193;</button>
+        <button class="compass-btn" [class.exit]="hasExit(direction.South)" [class.exit-south]="hasExit(direction.South)" (click)="nav(direction.South)" [attr.aria-disabled]="!hasExit(direction.South) || isTransitioning()" [attr.aria-label]="hasExit(direction.South) ? 'Go south' : 'No exit south'" aria-describedby="currentRoomId">&#x2193;</button>
         <div class="compass-spacer"></div>
       </div>
     </div>
@@ -31,7 +31,7 @@
   </div>
   
   <div class="action-area">
-    <button class="startover-btn" (click)="startOver()" [disabled]="isTransitioning()" aria-label="Restart game from beginning">↺ StartOver</button>
+    <button class="startover-btn" (click)="startOver()" [attr.aria-disabled]="isTransitioning()" aria-label="Restart game from beginning">↺ StartOver</button>
   </div>
   }
-
+</div>

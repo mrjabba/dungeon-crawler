@@ -96,6 +96,35 @@ describe('RoomDecoratorComponent', () => {
     expect(text).toContain('Your inventory is empty');
   });
 
+  it('should keep compass buttons focusable when they have no exit', async () => {
+    const { harness } = await setup();
+    const west = await harness.getCompassButton(Direction.West);
+    expect(await west.getProperty('disabled')).toBe(false);
+    expect(await west.getAttribute('aria-disabled')).toBe('true');
+
+    await west.click();
+    await harness.waitForTransition();
+    expect(await harness.getRoomIdText()).toEqual('100');
+  });
+
+  it('should keep buttons focusable but inactive during a transition', async () => {
+    const { harness } = await setup();
+    const north = await harness.getCompassButton(Direction.North);
+    expect(await north.getAttribute('aria-disabled')).toBe('false');
+
+    await north.click();
+    expect(await north.getProperty('disabled')).toBe(false);
+    expect(await north.getAttribute('aria-disabled')).toBe('true');
+    const startOver = await harness.getStartOverButton();
+    expect(await startOver.getProperty('disabled')).toBe(false);
+    expect(await startOver.getAttribute('aria-disabled')).toBe('true');
+
+    await harness.waitForTransition();
+    expect(await harness.getRoomIdText()).toEqual('101');
+    expect(await north.getAttribute('aria-disabled')).toBe('false');
+    expect(await startOver.getAttribute('aria-disabled')).toBe('false');
+  });
+
   it('should change background image when player moves to a different room', async () => {
     const { harness } = await setup();
     const initialBackground = await harness.getBackgroundImage();

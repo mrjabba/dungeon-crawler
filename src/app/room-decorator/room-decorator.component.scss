@@ -147,7 +147,7 @@
   outline-offset: 2px;
 }
 
-.compass-btn:disabled {
+.compass-btn[aria-disabled="true"] {
   opacity: 0.3;
   cursor: not-allowed;
   border-color: var(--terminal-accent);
@@ -158,7 +158,7 @@
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
 
-.compass-btn.exit:hover:not(:disabled) {
+.compass-btn.exit:hover:not([aria-disabled="true"]) {
   background: var(--terminal-accent);
   box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
   transform: scale(1.05);
@@ -184,18 +184,18 @@
   letter-spacing: 2px;
 }
 
-.startover-btn:hover:not(:disabled) {
+.startover-btn:hover:not([aria-disabled="true"]) {
   background: #330000;
   box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
   transform: translateY(-2px);
 }
 
-.startover-btn:active:not(:disabled) {
+.startover-btn:active:not([aria-disabled="true"]) {
   transform: translateY(0);
   box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
 }
 
-.startover-btn:disabled {
+.startover-btn[aria-disabled="true"] {
   opacity: 0.5;
   cursor: not-allowed;
 }
