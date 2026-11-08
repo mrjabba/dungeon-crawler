@@ -19,6 +19,14 @@ export class RoomDecoratorComponentHarness extends ComponentHarness {
     return button.click();
   }
 
+  async startOver(): Promise<void> {
+    return (await this.locatorFor('.startover-btn')()).click();
+  }
+
+  async getText(): Promise<string> {
+    return (await this.host()).text();
+  }
+
   async waitForTransition(): Promise<void> {
     await new Promise(resolve => setTimeout(resolve, 600));
   }

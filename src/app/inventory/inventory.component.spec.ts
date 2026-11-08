@@ -24,6 +24,17 @@ describe('InventoryComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should show the room empty state only when the room has no items', async () => {
+    const fixture = TestBed.createComponent(InventoryComponent);
+    fixture.componentRef.setInput('roomContents', ['apple']);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.textContent).not.toContain('No items in this room');
+
+    fixture.componentRef.setInput('roomContents', []);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.textContent).toContain('No items in this room');
+  });
+
   it('should render inventory', async () => {
     expect(await harness.isPresent()).toBe(true);
   });
