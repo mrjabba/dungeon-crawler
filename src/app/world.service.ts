@@ -30,10 +30,11 @@ export class WorldService {
   }
 
   public getRoom(id: number): Room {
-    return this.rooms.filter((room: Room) => {
-      // FIXME write a test here
-      return room.id === id;
-    })[0];
+    const room = this.rooms.find((room: Room) => room.id === id);
+    if (!room) {
+      throw new Error(`Unknown room ${id}`);
+    }
+    return room;
   }
 
   private loadRooms(): void {
