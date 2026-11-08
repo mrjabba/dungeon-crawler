@@ -16,6 +16,11 @@ export class WorldService {
     }
   }
 
+  public reset(): void {
+    this.loadRooms();
+    this.inventory.items = [];
+  }
+
   public getInventory(): Inventory {
     return this.inventory;
   }

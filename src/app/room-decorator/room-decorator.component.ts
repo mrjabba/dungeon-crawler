@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit, WritableSignal, computed, input, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, WritableSignal, computed, input, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Coordinate, Direction, Room } from '../world';
 import { WorldService } from '../world.service';
@@ -18,15 +17,15 @@ const BACKGROUND_IMAGES = [
 
 @Component({
   selector: 'room-decorator',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
     MatButtonModule,
     InventoryComponent
     ],
   templateUrl: './room-decorator.component.html',
-  styleUrls: ['./room-decorator.component.scss']
+  styleUrls: ['./room-decorator.component.scss'],
+  host: {
+    '(window:keydown)': 'handleKeyboardEvent($event)'
+  }
 })
 export class RoomDecoratorComponent implements OnInit {
 
@@ -56,8 +55,9 @@ export class RoomDecoratorComponent implements OnInit {
   constructor(public worldService: WorldService, private cdr: ChangeDetectorRef) {
    }
 
-  @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
+    if (event.key.startsWith('Arrow')) event.preventDefault();
     if (this.isTransitioning()) return;
     
     switch(event.key) {
@@ -139,6 +139,7 @@ export class RoomDecoratorComponent implements OnInit {
     
     this.isTransitioning.set(true);
     setTimeout(() => {
+      this.worldService.reset();
       this.currentRoom = this.worldService.goToStartingRoom();
       this.currentBackgroundIndex.set(0);
       this.cdr.markForCheck();

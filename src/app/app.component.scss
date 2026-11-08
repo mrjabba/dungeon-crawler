@@ -52,8 +52,8 @@
   border: 3px solid var(--terminal-green);
   text-align: center;
   border-radius: 4px;
-  background: var(--terminal-bg);
-  box-shadow: 
+  background-color: var(--terminal-bg);
+  box-shadow:
     0 0 30px rgba(0, 255, 0, 0.3),
     inset 0 0 60px rgba(0, 255, 0, 0.05);
   padding: 20px;

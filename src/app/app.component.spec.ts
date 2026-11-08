@@ -26,6 +26,14 @@ describe('AppComponent', () => {
     expect(app.startingRoomId).toEqual(WorldService.STARTING_LOCATION);
   });
 
+  it('should have one main landmark and a unique room id', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    await fixture.whenStable();
+    const page: HTMLElement = fixture.nativeElement;
+    expect(page.querySelectorAll('main, [role="main"]').length).toBe(1);
+    expect(page.querySelectorAll('[id="currentRoomId"]').length).toBe(1);
+  });
+
   it('should include a room decorator', async () => {
     expect(await harness.hasRoomDecorator()).toBe(true);
   });
